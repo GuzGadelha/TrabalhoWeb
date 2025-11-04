@@ -1,97 +1,125 @@
-/* Google font import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;&display=swap');
-
-*{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-
-:root{
-    /* - - Colors - - */
-    --body-color: #E4E9F7;
-    --sidebar-color: #FFF;
-    --primary-color: #695CFE;
-    --primary-color-light: #F6F5FF;
-    --toggle-color: #DDD;
-    --text-color: #707070;
-
-    /* - - Transitions - - */
-    --trans03: all 0.2s ease;
-    --trans03: all 0.3s ease;
-    --trans04: all 0.4s ease;
-    --trans05: all 0.5s ease;
+body {
+  display: flex;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
-
-body{
-    height: 100vh;
-    background: var(--body-color);
+:root {
+  --bg: #f5f6fa;
+  --text: #333;
+  --sidebar: #fff;
+  --primary: #6c63ff;
 }
-
-/* - - resuable CSS - - */
-.sidebar .text{
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text-color);
+body.dark {
+  --bg: #18191a;
+  --text: #eee;
+  --sidebar: #242526;
+  --primary: #8b7fff;
 }
-
-.sidebar .image{
-    min-width: 60px;
-    display: flex;
-    align-items: center;
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background: var(--sidebar);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
 }
-
-/* - - sidebar - - */
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100px;
-    width: 250px;
-    padding: 10px 14px;
-    background: var(--sidebar-color);
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
 }
-
-.sidebar header{
-    position: relative;
+.menu {
+  list-style: none;
 }
-
-.sidebar .image-text img{
-    width: 40;
-    border-radius: 6px;
+.menu li {
+  padding: 0.8rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s;
 }
-
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
+.menu li:hover {
+  background: var(--primary);
+  color: #fff;
 }
-
-header .image-text .header-text{
-    display: flex;
-    flex-direction: column;
+.footer {
+  text-align: center;
 }
-
-.header-text .name{
-    font-weight: 600;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
 }
-
-.header-text .tipoUsuario{
-    margin-top: -2px;
+.switch input { display: none; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
 }
-
-.sidebar header .toggle{
-    position: absolute;
-    top: 50%;
-    left: -25px;
-    transform: translateY(-50%);
-    height: 25px;
-    width: 25px;
-    background: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: var(--sidebar-color);
-    font-size: 22px;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: var(--primary);
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+#content {
+  margin-left: 240px;
+  padding: 2rem;
+  flex: 1;
+}
+#fab {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px; height: 60px;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal.hidden { display: none; }
+.modal-content {
+  background: var(--sidebar);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  color: var(--text);
+}
+#closeModal {
+  float: right;
+  cursor: pointer;
 }

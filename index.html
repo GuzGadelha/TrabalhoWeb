@@ -1,34 +1,53 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS -->
-   <link rel="stylesheet" href="style.css">
-
-  <!-- Boxicons CSS -->
-   <link  href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-  
-  <title>PubTalk</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Music</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- ========== Sidebar fixa com modo claro/escuro ========== -->
   <nav class="sidebar">
-    <header>
-      <div class="image-text">
-        <span class="image">
-          <img src="itunes.svg" alt="logo">
-        </span>
-
-        <div class="text header-text">
-          <span class="name">PubTalk</span>
-          <span class="tipoUsuario">Artista</span>
-        </div>
-      </div>
-
-      <i class='bx bx-chevron-right toggle' ></i>
-    </header>
+    <div class="logo">
+      <span>SM</span>
+      <h2>SocialMusic</h2>
+    </div>
+    <ul class="menu">
+      <li data-page="feed">Feed</li>
+      <li data-page="favoritas">Favoritas</li>
+      <li data-page="playlists">Playlists</li>
+      <li data-page="perfil">Perfil</li>
+    </ul>
+    <div class="footer">
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
   </nav>
+  <!-- ========== Fim da Sidebar ========== -->
+
+  <!-- ========== Conteúdo Principal ========== -->
+  <main id="content">
+  </main>
+  <!-- ========== Fim do Conteúdo Principal ========== -->
+
+  <!-- ========== Botão Flutuante ========== -->
+  <button id="fab">+</button>
+  <!-- ========== Fim do Botão Flutuante ========== -->
+
+  <!-- ========== Modal ========== -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <textarea id="modalInput" placeholder="Digite aqui..."></textarea>
+      <button id="modalSave">Salvar</button>
+    </div>
+  </div>
+  <!-- ========== Fim do Modal ========== -->
+
+  <script src="script.js"></script>
 </body>
 </html>
