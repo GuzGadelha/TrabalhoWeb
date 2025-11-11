@@ -1,34 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS -->
-   <link rel="stylesheet" href="style.css">
-
-  <!-- Boxicons CSS -->
-   <link  href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-  
-  <title>PubTalk</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Music</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="android-chrome-192x192.png">
+  <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
+
   <nav class="sidebar">
-    <header>
-      <div class="image-text">
-        <span class="image">
-          <img src="itunes.svg" alt="logo">
-        </span>
-
-        <div class="text header-text">
-          <span class="name">PubTalk</span>
-          <span class="tipoUsuario">Artista</span>
-        </div>
-      </div>
-
-      <i class='bx bx-chevron-right toggle' ></i>
-    </header>
+    <div class="logo">
+      <span><img src="itunes.png" alt="logo">
+        <p>SocialMusic</p></span>
+    </div>
+    <ul class="menu">
+      <li class="feed"><a href="index.html">Feed</a></li>
+      <li class="favoritas"><a href="favoritas.html">Favoritas</a></li>
+      <li class="playlists"><a href="playlists.html">Playlists</a></li>
+      <li class="perfil"><a href="perfil.html">Perfil</a></li>
+    </ul>
+    <div class="footer">
+      <label class="switch">
+        <input type="checkbox" id="botaoModoEscuro" />
+        <span class="slider"></span>
+      </label>
+    </div>
   </nav>
+
+  <main id="content">
+    <h2>Pagina principal</h2>
+    <p>Onde aparecerão postagens mais recentes</p>
+  </main>
+
+  <button id="fab">+</button>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <textarea id="modalInput" placeholder="Digite aqui..."></textarea>
+      <button id="modalSave">Salvar</button>
+    </div>
+  </div>
+
+  <script src="mock-data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
