@@ -7,39 +7,54 @@ const mockUsuario = {
   avatarUrl: "https://i.pravatar.cc/150" 
 };
 
-// Simula músicas (baseado na classe Musica do UML)
+// Simula músicas 
 let mockMusicas = [
   { id: "m1", nome: "Stairway To Heaven", autor: "Led Zepellin", album: "Led Zepellin IV" },
   { id: "m2", nome: "Do for Love", autor: "TuPac", album: "Single" },
-  { id: "m3", nome: "Chicago", autor: "Michael Jackson", album: "Xscape" }
+  { id: "m3", nome: "Chicago", autor: "Michael Jackson", album: "Xscape" },
+  { id: "m4", nome: "Neutron Star Colision", autor: "muse", album:"Black Holes & Revelations"}
 ];
 
-// Simula playlists (baseado na classe Playlist do UML)
-// Usamos "let" para poder adicionar/remover itens
+// Simula playlists 
 let mockPlaylists = [
   { 
     id: "p1", 
     donoId: "Zé Beto", 
     titulo: "Pra chorar e ficar calado!", 
     privado: false, 
-    musicas: ["Tempo Perdido", "borboletas"] // Lista de IDs de mockMusicas
+    musicas: ["m1", ""] // Lista de IDs de mockMusicas
   },
   { 
     id: "p2", 
     donoId: "Jennifer Alonso", 
     titulo: "White Girl Problems", 
     privado: true, 
-    musicas: ["Party in U.S.A."]
+    musicas: ["Party in U.S.A.", "I kiss a girl", ""]
   }
 ];
 
-// Simula comentários (baseado na classe Comentarios do UML)
+// Simula comentários
 let mockComentarios = [
   { 
     id: "c1", 
-    origemId: "u1", // ID do mockUsuario
+    origemId: "u1", 
     origemNome: "Gabriela Azevedo",
-    conteudo: "Adorei essa música!", 
-    musicaId: "Neutron Star Colision" // Comentário na "Música Exemplo 1"
+    conteudo: "Minha música favorita!", 
+    musicaId: "m4",
+    avaliacao: 5
+  },
+
+  { 
+    id: "c2", 
+    origemId: mockUsuario.id, 
+    origemNome: mockUsuario.nome,
+    conteudo: "Michael sempre será o rei!", 
+    musicaId: "m3", 
+    avaliacao: 4
   }
+
+
+
 ];
+
+const mockFavoritas = ["m1", "m2"];

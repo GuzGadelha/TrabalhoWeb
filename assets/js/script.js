@@ -1,12 +1,18 @@
 (function () {
   'use strict';
 
+  function getMusicaById(id) {
+    return typeof mockMusicas !== 'undefined' ? mockMusicas.find(musica => musica.id === id) : null;
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
   ready(() => {
+
+    // Lógica de Modo Escuro e Menu Ativo
     const toggleId = 'botaoModoEscuro';
     const toggle = document.getElementById(toggleId);
 
@@ -36,6 +42,7 @@
       });
     }
 
+    // Lógica do Modal 
     const fab = document.getElementById('fab');
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('closeModal');
@@ -43,14 +50,37 @@
     const modalInput = document.getElementById('modalInput');
     const modalSave = document.getElementById('modalSave');
 
+    //  variáveis para seleção de Música e Avaliação
+    const postOptions = document.getElementById('post-options');
+    const modalMusica = document.getElementById('modalMusica');
+    const modalAvaliacao = document.getElementById('modalAvaliacao');
+
+
     if (fab && modal) {
       fab.addEventListener('click', () => {
         modal.classList.remove('hidden');
         
         let title = "Nova Postagem";
-        if (document.title === "Playlists") title = "Nova Playlist";
-        if (document.title === "Social Music") title = "Novo Comentário";
-        
+
+        if (document.title === "Playlists") {
+          title = "Nova Playlist";
+          if (postOptions) postOptions.style.display = 'none';
+        } else if (document.title === "Social Music") {
+          title = "Novo Comentário";
+          if (postOptions) postOptions.style.display = 'block';
+
+          if (modalMusica) {
+                 modalMusica.innerHTML = ''; 
+                 mockMusicas.forEach(m => {
+                     const option = document.createElement('option');
+                     option.value = m.id;
+                     option.textContent = m.nome;
+                     modalMusica.appendChild(option);
+                 });
+             }
+        } else {
+          if (postOptions) postOptions.style.display = 'none';
+        } 
         if (modalTitle) modalTitle.textContent = title;
         if (modalInput) modalInput.focus();
       });
@@ -60,6 +90,7 @@
       closeModal.addEventListener('click', () => modal.classList.add('hidden'));
     }
 
+    // Lógica de Salvamento do Modal
     if (modalSave && modal && modalInput) {
       modalSave.addEventListener('click', () => {
         const text = modalInput.value.trim();
@@ -76,22 +107,32 @@
             mockPlaylists.push(novaPlaylist);
             localStorage.setItem('minhasPlaylists', JSON.stringify(mockPlaylists));
           }
-          
-          if (document.title === "Social Music") {
+
+          if (document.title === "Social Music" && modalMusica && modalAvaliacao) {
+            const musicaId = modalMusica.value;
+            const avaliacao = parseInt(modalAvaliacao.value); 
+
+            if (!musicaId || isNaN(avaliacao) || avaliacao < 1 || avaliacao > 5){
+              alert("Por favor, selecione uma música e uma nota válida (1-5).");
+              return;
+            }
+
              const novoComentario = {
                 id: "c" + (mockComentarios.length + 1),
                 origemId: mockUsuario.id,
                 origemNome: mockUsuario.nome,
                 conteudo: text,
-                musicaId: "m-geral"
+                musicaId: musicaId,
+                avaliacao: avaliacao
              };
              mockComentarios.push(novoComentario);
              localStorage.setItem('meusComentarios', JSON.stringify(mockComentarios));
           }
-          
+        
           location.reload();
         }
         modalInput.value = '';
+        if (modalAvaliacao) modalAvaliacao.value = '';
         modal.classList.add('hidden');
       });
     }
@@ -107,7 +148,9 @@
         modal.classList.add('hidden');
       }
     });
-    
+
+
+    // Lógica de Renderização de Conteúdo
     const contentArea = document.getElementById('content');
     if (!contentArea) return;
 
@@ -122,16 +165,29 @@
       document.getElementById('stat-playlists').textContent = minhasPlaylists.length;
       document.getElementById('stat-comentarios').textContent = meusComentarios.length;
       document.getElementById('stat-favoritas').textContent = mockFavoritas.length;
-    
+
       const activityFeed = document.getElementById('activity-feed');
       activityFeed.innerHTML = '';
-      
+
       meusComentarios.slice().reverse().forEach(comentario => {
+        const musica = getMusicaById(comentario.musicaId); 
+
         const comentCard = document.createElement('div');
         comentCard.className = 'comment-card';
-        comentCard.innerHTML = `<p><strong>${comentario.origemNome}</strong> disse:</p><p>${comentario.conteudo}</p>`;
+
+        let musicaInfo = '';
+        if (musica) {
+          musicaInfo = `<p class="music-info">${musica.nome} - Nota: <strong>${comentario.avaliacao}/5</strong></p>`;
+        }
+        
+        comentCard.innerHTML = `
+        <p><strong>${comentario.origemNome}</strong></p>
+        ${musicaInfo}
+        <hr style="border: 0; border-top: 1px solid #ccc; margin: 0.5rem 0;">
+        <p>${comentario.conteudo}</p>
+        `;
         activityFeed.appendChild(comentCard);
-      });
+      });  
     }
 
     if (document.title === "Playlists") {
@@ -184,12 +240,24 @@
         contentArea.appendChild(feedGeral);
 
         mockComentarios.slice().reverse().forEach(comentario => {
-            const comentCard = document.createElement('div');
-            comentCard.className = 'comment-card';
-            comentCard.innerHTML = `<p><strong>${comentario.origemNome}</strong> postou:</p><p>${comentario.conteudo}</p>`;
-            feedGeral.appendChild(comentCard);
-        });
-    }
+          const musica = getMusicaById(comentario.musicaId);
 
-  });
+          const comentCard = document.createElement('div');
+          comentCard.className = 'comment-card';
+
+          let musicaInfo = '';
+          if (musica) {
+            musicaInfo = `<p class="music-info">${musica.nome} - Nota: <strong>${comentario.avaliacao}/5</strong></p>`;
+          }
+
+          comentCard.innerHTML = `
+          <p><strong>${comentario.origemNome}</strong></p>
+           ${musicaInfo}
+           <hr style="border: 0; border-top: 1px solid #ccc; margin: 0.5rem 0;">
+           <p>${comentario.conteudo}</p>
+           `;
+           feedGeral.appendChild(comentCard);
+          });
+        }
+      });
 })();
