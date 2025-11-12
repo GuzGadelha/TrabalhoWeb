@@ -19,7 +19,7 @@
   --trans05: all 0.5s ease;
 }
 
-/* ---------- Layout Raiz ---------- */
+/* ---------- Layout Base ---------- */
 body {
   background: var(--bg);
   color: var(--text);

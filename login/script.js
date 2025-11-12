@@ -45,14 +45,18 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
   const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
 
-  if (!email.includes("@") || senha.length < 6) {
-    alert("Credenciais inválidas!");
+
+/* ---------- "Usuario cadastrado" ---------- */
+  if (email === "rafaeldmlaluno@faculdade.com" && senha === "coxinha123") {
+    alert("Login realizado com sucesso!");
+    // Redireciona para a página principal (ajuste o nome se for diferente)
+    window.location.href = "../index.html";
     return;
   }
 
-  alert(`Bem-vindo de volta, ${email}!`);
+/* ---------- "Usuario não cadastrado" ---------- */
+  alert("Credenciais inválidas!");
 });
-
 
 /* ---------- Alternância de tema claro/escuro ---------- */
 const themeSwitch = document.getElementById("themeSwitch");
