@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --bg: #f5f6fa;
+  --text: #333;
+  --sidebar: #fff;
+  --primary: #6c63ff;
+
+  --trans02: all 0.2s ease;
+  --trans03: all 0.3s ease;
+  --trans04: all 0.4s ease;
+  --trans05: all 0.5s ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: var(--trans03);
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+}
+
+.form-box {
+  background: var(--sidebar);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: var(--trans03);
+}
+
+.form-box.hidden {
+  display: none;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: var(--trans03);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--trans03);
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.toggle {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.toggle a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--trans03);
+}
+
+.toggle a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Modo escuro opcional ---- */
+body.dark {
+  --bg: #18191a;
+  --text: #eee;
+  --sidebar: #242526;
+  --primary: #8b7fff;
+}
+
+body.dark .form-box {
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
